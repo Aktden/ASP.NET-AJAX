@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Api\Controllers\" />
+    <Folder Include="Api\Contracts\" />
+    <Folder Include="Api\Extensions\" />
+    <Folder Include="Application\Common\" />
+    <Folder Include="Application\Orders\CreateOrder\" />
+    <Folder Include="Application\Orders\GetOrder\" />
+    <Folder Include="Application\Orders\CancleOrder\" />
+    <Folder Include="Domain\" />
+    <Folder Include="Infrastructure\Repositories\" />
+    <Folder Include="Web\Extensions\" />
+  </ItemGroup>
+
+</Project>
