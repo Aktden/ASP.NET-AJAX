@@ -62,11 +62,11 @@ POST /api/form
 
 ## Жизненный цикл приложения
 
-1. `WebApplication.CreateBuilder(args)` — создание конфигурации приложения.
-2. `builder.Build()` — создание экземпляра `WebApplication`.
+1. `WebApplication.CreateBuilder(args)` - создание конфигурации приложения.
+2. `builder.Build()` - создание экземпляра `WebApplication`.
 3. Регистрация Middleware.
 4. Регистрация статических файлов и API-маршрутов.
-5. `app.Run()` — запуск веб-сервера.
+5. `app.Run()` - запуск веб-сервера.
 6. Срабатывает `ApplicationStarted`.
 7. Приложение принимает HTTP-запросы.
 8. При завершении срабатывает `ApplicationStopping`.
@@ -128,4 +128,4 @@ http://localhost:5000
 3. Форму в `wwwroot/index.html`.
 4. AJAX-запрос через `fetch()`.
 5. Схему жизненного цикла из папки `Screenshots`.
-6. При запуске проекта — сообщения Middleware в консоли и запрос `POST /api/form` в DevTools → Network.
+6. При запуске проекта - сообщения Middleware в консоли и запрос `POST /api/form` в DevTools → Network.
