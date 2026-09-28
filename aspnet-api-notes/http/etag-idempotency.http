@@ -1,0 +1,100 @@
+# ETag: кэширование
+
+# Первый запрос
+GET /users/1
+
+# Ответ:
+# 200 OK
+# ETag: "abc123"
+
+###
+
+# Второй запрос с тем же ETag
+GET /users/1
+If-None-Match: "abc123"
+
+# Ответ:
+# 304 Not Modified
+
+###
+
+# Optimistic concurrency через If-Match
+
+# Клиент A читает ресурс:
+GET /doc/1
+
+# Ответ:
+# ETag: "v5"
+
+###
+
+# Клиент A обновляет:
+PUT /doc/1
+If-Match: "v5"
+
+# Ответ:
+# 200 OK
+
+###
+
+# Клиент B пытается обновить с устаревшим ETag:
+PUT /doc/1
+If-Match: "v5"
+
+# Если текущий ETag уже "v6":
+# 412 Precondition Failed
+
+###
+
+# Idempotency-Key для POST/PATCH
+POST /payments
+Idempotency-Key: <uuid>
+Content-Type: application/json
+
+{"amount": 100, "currency": "RUB"}
+
+# Ответ:
+# 201 Created
+# {"id": "pay_1", "amount": 100, "currency": "RUB"}
+
+###
+
+# DELETE
+DELETE /users/1
+
+# Первый вызов:
+# 204 No Content
+
+# Повторный вызов:
+# 404 Not Found
+# Состояние ресурса при этом остаётся тем же — ресурс удалён.
+
+###
+
+# REST-методы из конспекта
+# GET /users       — список
+# GET /users/1     — один
+# POST /users      — создать (201 + Location)
+# PUT /users/1     — заменить полностью
+# PATCH /users/1   — изменить частично
+# DELETE /users/1  — удалить
+
+###
+
+# Ещё один пример If-Match
+GET /document/1
+
+# Ответ:
+# ETag: "v5"
+
+###
+
+PUT /document/1
+If-Match: "v5"
+Content-Type: application/json
+
+{}
+
+# Возможные ответы:
+# 200 OK
+# 412 Precondition Failed
