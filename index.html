@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASP.NET Core + AJAX</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            color: #1f2937;
+        }
+        .container {
+            width: 430px;
+            padding: 28px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0,0,0,.12);
+        }
+        h1 { margin: 0 0 8px; font-size: 26px; }
+        p { color: #6b7280; margin: 0 0 18px; }
+        label { display: block; margin-top: 14px; font-weight: 700; }
+        input, textarea, button {
+            width: 100%;
+            margin-top: 7px;
+            padding: 12px;
+            border-radius: 9px;
+            font: inherit;
+        }
+        input, textarea { border: 1px solid #cbd5e1; }
+        textarea { min-height: 110px; resize: vertical; }
+        button {
+            margin-top: 18px;
+            border: none;
+            background: #2563eb;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        button:hover { background: #1d4ed8; }
+        #result {
+            margin-top: 16px;
+            min-height: 44px;
+            padding: 12px;
+            border-radius: 9px;
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Форма пользователя</h1>
+    <p>ASP.NET Core + AJAX + Middleware</p>
+
+    <form id="userForm">
+        <label for="name">Имя</label>
+        <input id="name" type="text" placeholder="Иван" required>
+
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="ivan@example.com" required>
+
+        <label for="message">Сообщение</label>
+        <textarea id="message" placeholder="Введите сообщение"></textarea>
+
+        <button type="submit">Отправить через AJAX</button>
+    </form>
+
+    <div id="result">Здесь появится ответ сервера.</div>
+</div>
+
+<script>
+const form = document.getElementById("userForm");
+const resultBox = document.getElementById("result");
+
+form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+    };
+
+    resultBox.textContent = "Отправка...";
+
+    try {
+        const response = await fetch("/api/form", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const result = await response.json();
+        resultBox.textContent = result.message;
+    } catch (error) {
+        resultBox.textContent = "Ошибка отправки данных";
+        console.error(error);
+    }
+});
+</script>
+</body>
+</html>
