@@ -1,5 +1,9 @@
 # Todo Management API
 
+<img width="1920" height="1080" alt="WindowsTerminal_rBUJJEA4iB" src="https://github.com/user-attachments/assets/dbe76fc8-72a9-4c6d-9832-ace3350f2e54" />
+
+<img width="1920" height="1080" alt="WindowsTerminal_H6jyP5ehOr" src="https://github.com/user-attachments/assets/69fb6c6d-006e-43c7-a2a1-15c66fa007f8" />
+
 Учебный проект на C# / ASP.NET Core по примеру OpenAPI из предоставленного файла.
 
 ## Реализовано
